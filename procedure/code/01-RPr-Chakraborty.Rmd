@@ -356,7 +356,9 @@ However, we replace the missing data with zeros, producing results identical to 
 
 ```{r missing data}
 # county with missing data
-filter(acs_covid, is.na(bpov_pct)) %>% st_drop_geometry() %>% kable()
+missing_data <- filter(acs_covid, is.na(bpov_pct)) %>% st_drop_geometry()
+missing_data <- t(missing_data)
+missing_data %>% kable()
 
 # replace NA with 0 for missing data
 acs_covid[is.na(acs_covid$bpov_pct), ]$bpov_pct <- 0
@@ -1858,7 +1860,7 @@ tm_gee_weights <- tm_shape(gee_resid) +
     lwd = 0.2,
     palette = "Oranges",
     legend.hist = FALSE,
-    midpoint = 0
+    midpoint = 0.5
   ) +
   tm_shape(state) +
     tm_borders("grey", lwd = .5) +
