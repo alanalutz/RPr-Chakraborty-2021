@@ -15,14 +15,23 @@ Author: Alana Lutz
 
 ## Analysis
 
-1)  Transpose the data table of missing data so that it is vertical, rather than horizontal, and does not go off the screen. This change will improve the clarity and readability of the report.
-2)  Fix the mistaken parameter on the final choropleth map of county weights so that it uses the whole color ramp. This change will improve the aesthetics and interpretability of the map.
-3)  Run a new GEE using only SatScan GINI-optimized clusters without incorporating state clusters. The justification for this analysis is that SatScan is already accounting for possible spatial correlation both within and between states. SatScan is producing clusters that are quantitatively justified by groupings of higher relative risk scores, while our assumption that each state is a correlated cluster is purely theoretical. Further dividing the SatScan clusters by state may be introduce an assumption of correlation that doesn't exist, and state-level clustering is already accounted for by SatScan spatial clustering. I chose to specifically modify the SatScan GINI-optimized cluster GEE because this cluster methodology seems to be the most robust.
+1)  Transpose the data table of missing data so that it is vertical, rather than horizontal, and does not go off the screen.
+This change will improve the clarity and readability of the report.
+2)  Fix the mistaken parameter on the final choropleth map of county weights so that it uses the whole color ramp.
+This change will improve the aesthetics and interpretability of the map.
+3)  Run a new GEE using only SatScan GINI-optimized clusters without incorporating state clusters.
+The justification for this analysis is that SatScan is already accounting for possible spatial correlation both within and between states.
+SatScan is producing clusters that are quantitatively justified by groupings of higher relative risk scores, while our assumption that each state is a correlated cluster is purely theoretical.
+Further dividing the SatScan clusters by state may be introduce an assumption of correlation that doesn't exist, and state-level clustering is already accounted for by SatScan spatial clustering.
+I chose to specifically modify the SatScan GINI-optimized cluster GEE because this cluster methodology seems to be the most robust.
 
 ## Results
 
-The first two changes are purely aesthetic and will not affect the results of the analysis. For the third change, I hope to test the sensitivity of the model to the inclusion or exclusion of state clusters. I will produce a table showing the results of the new GEE, and then add the coefficients of this new GEE to the existing dot-and-whisker plot to compare with the other GEEs.
+The first two changes are purely aesthetic and will not affect the results of the analysis.
+For the third change, I hope to test the sensitivity of the model to the inclusion or exclusion of state clusters.
+I will produce a table showing the results of the new GEE, and then add the coefficients of this new GEE to the existing dot-and-whisker plot to compare with the other GEEs.
 
 ## Discussion
 
-If the dot-and-whisker plot shows a dramatic difference between the new GEE and the five existing GEEs that include state clusters, it will be clear that the model is sensitive to the inclusion of state clusters, and that there is likely within-state correlation that is not accounted for by the SatScan clusters. If the dot-and-whisker plot shows a high similarity between the new GEE and the five existing GEEs, it will be clear that the model is not sensitive to the inclusion of state clusters, and that the SatScan clustering is sufficient to account for within-state correlation.
+If the dot-and-whisker plot shows a dramatic difference between the new GEE and the five existing GEEs that include state clusters, it will be clear that the model is sensitive to the inclusion of state clusters, and that there is likely within-state correlation that is not accounted for by the SatScan clusters.
+If the dot-and-whisker plot shows a high similarity between the new GEE and the five existing GEEs, it will be clear that the model is not sensitive to the inclusion of state clusters, and that the SatScan clustering is sufficient to account for within-state correlation.
