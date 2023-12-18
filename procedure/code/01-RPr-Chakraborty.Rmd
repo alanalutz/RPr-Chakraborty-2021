@@ -1774,8 +1774,10 @@ The shifts were most significant for the Ethnicity model, in which the Hispanic 
 Secondarily, the negative Above poverty level and Male coefficients both increased beyond the range of the original confidence intervals.
 
 Finally, removing the state ID clusters from the SaTScan GINI-optimized clusters slightly decreased the magnitude of most coefficients relative to the GEE model based on both GINI-optimized clusters and state IDs.
-The greatest difference is seen in the Hispanic model, in which the coefficient lost magnitude beyond the confidence interval of the GINI-optimized cluster with state ID model.
-This shift confirms that the Hispanic coefficient is not robust to changes in analytical decisions, while other coefficients are.
+The greatest differences are seen in the Hispanic and Black models, in which the coefficients lost magnitude beyond the confidence intervals of the GINI-optimized cluster with state ID model.
+This shift confirms that the Hispanic and Black coefficients are less robust than other coefficients to changes in analytical decisions.
+Since these variables are unstable under different clustering criteria, they may have a weaker geographic relationship with COVID-19.
+Despite changing the magnitude of certain coefficients, the new model (without state clustering) appears to have a similar amount of error to the other models.
 
 Overall, we can see that some coefficients remained significant and robust to changes in computational environment, data errors, and clustering criteria.
 Robustly positive coefficients included Black, Native American, Non-Hispanic non-White, Below poverty level, and Female.
@@ -1885,8 +1887,7 @@ tm_gee_weights <- tm_shape(gee_resid) +
     border.alpha = .2,
     lwd = 0.2,
     palette = "Oranges",
-    legend.hist = FALSE,
-    midpoint = 0.5
+    legend.hist = FALSE
   ) +
   tm_shape(state) +
     tm_borders("grey", lwd = .5) +
@@ -1964,6 +1965,9 @@ The rationale for this reanalysis was that SaTScan is already accounting for pot
 SaTScan is producing clusters that are quantitatively justified by groupings of higher relative risk scores, while our assumption that each state is a correlated cluster is purely theoretical.
 Further dividing the SaTScan clusters by state may introduce an assumption of correlation that doesn't exist, and state-level clustering is already accounted for by SaTScan spatial clustering.
 We chose to specifically modify the SaTScan GINI-optimized cluster GEE because this cluster methodology seems to be the most robust.
+However, it is worth noting that without incorporating state clustering, we produce a model with one very large cluster of no-risk areas.
+Creating large clusters that are not divided by state may cause there to be very little correlation within clusters, resulting in counties with weights close to 1.
+The fact that this model produced results similar to that of the other models suggests that geographic clustering plays only a small role in the overall analysis.
 
 In the **third part** of our reproduction analysis, the results from each the five GEE models were largely consistent with Chakraborty's, suggesting robustness to modeling decisions with regards to GEE clusters.
 However, a few independent variables exhibited instability across models, suggesting weak or spurious relationships.
